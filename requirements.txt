@@ -1,0 +1,9 @@
+# How pytest execute work together
+
+#pytest → conftest.py → page fixture
+#                      ↓
+#                  BasePage
+#                      ↓
+#              VerticalMenuBase
+#                      ↓
+#                Page Objects
