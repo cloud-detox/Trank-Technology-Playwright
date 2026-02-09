@@ -2,7 +2,7 @@ import pytest
 from playwright.sync_api import sync_playwright
 from config import BASE_URL
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="session")
 
 def page(request):
     p = sync_playwright().start()
