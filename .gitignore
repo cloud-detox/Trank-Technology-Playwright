@@ -1,7 +1,59 @@
+# ===============================
+# Python bytecode & cache
+# ===============================
 __pycache__/
+*.py[cod]
+*$py.class
+
+# ===============================
+# Pytest / Test caches
+# ===============================
 .pytest_cache/
-*.pyc
+.cache/
+htmlcov/
+
+# ===============================
+# Playwright
+# ===============================
+playwright-report/
+test-results/
+trace.zip
+*.webm
+*.png
+
+# ===============================
+# Virtual environments
+# ===============================
 venv/
+.venv/
+env/
 .env/
+
+# ===============================
+# IDE / Editor
+# ===============================
+.vscode/
+.idea/
+*.iml
+
+# ===============================
+# OS generated files
+# ===============================
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# ===============================
+# Logs & reports
+# ===============================
+*.log
+report.html
+allure-results/
+allure-report/
+
+# ===============================
+# Secrets & local config
+# ===============================
+.env.*
+secrets.*
+config.local.py
