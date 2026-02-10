@@ -1,14 +1,14 @@
 from pages.base_page import BasePage
 from playwright.sync_api import Page
 
-class AbourUs(BasePage):
+class Blog_page_class(BasePage):
     def __init__(self,page: Page):
         super().__init__(page)
-        self.click_link= self.page.locator('(//a[text()="About us"])[1]')
+        self.click_link= self.page.locator('(//a[text()="Blog"])[1]')
 
-    def click_about(self,expected_titles : dict):      
+    def click_blog(self,expected_titles : dict):      
         menu_text = self.click_link.inner_text().strip().lower()
-        print("menu_text:",menu_text)  # menu_text: about us
+        print("menu_text:",menu_text)  
 
         self.click_link.wait_for(state='visible')
         self.click_link.click(force=True)
@@ -16,9 +16,8 @@ class AbourUs(BasePage):
 
         actual_title = self.page.url
 
-        print("actual_title :",actual_title)    # actual_title:  https://www.tranktechnologies.com/about
-        print("expected_titles.get(menu_text) :",expected_titles.get(menu_text))  # xpected_titles.get(menu_text):  about
-       
+        print("actual_title :",actual_title)    
+        print("expected_titles.get(menu_text) :",expected_titles.get(menu_text))  
         expected_title = expected_titles.get(menu_text)
         
         assert expected_title is not None, (

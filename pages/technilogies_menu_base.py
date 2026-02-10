@@ -18,6 +18,15 @@ class TechnologiesMenuBase(BasePage):
         self.tab.hover()
         self.page.wait_for_timeout(300)
 
+
+    # def ai(self):
+    #     self.open_menu()
+    #     self.tab.click()
+    #     self.page.wait_for_load_state("load")
+    #     print(self.page.title())
+    #     self.page.go_back()
+    #     self.page.wait_for_load_state("domcontentloaded")
+
     def click_all_pages(self,expected_titles=None):
         failures = []
         count=self.page_links.count()
