@@ -7,8 +7,8 @@
 #              VerticalMenuBase
 #                      ↓
 #                Page Objects
-python -m venv venv
-venv\Scripts\activate
+#python -m venv venv
+#venv\Scripts\activate
 pip install playwright
 playwright install
 #pip insall pytest-playwright
