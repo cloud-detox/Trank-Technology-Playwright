@@ -13,7 +13,7 @@ class TradingPage:
 
     def click_all_trading_items(self):
         count = self.trading_items.count()
-        print("this is added")
+        print("this is added to check in Jenkins")
 
         for i in range(count):
             self.open_trading_menu()
