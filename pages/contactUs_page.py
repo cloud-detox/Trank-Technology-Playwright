@@ -1,32 +1,42 @@
-from pages.base_page import BasePage
-from playwright.sync_api import Page
+from utilities.screenShot import takeScrnsht
 
-class Contact_Us_page_class(BasePage):
-    def __init__(self,page: Page):
-        super().__init__(page)
-        self.click_link= self.page.locator('(//a[text()="Contact us"])[1]')
-
-    def click_ContactUs(self,expected_titles : dict):      
-        menu_text = self.click_link.inner_text().strip().lower()
-        print("menu_text:",menu_text)  
-
-        self.click_link.wait_for(state='visible')
-        self.click_link.click(force=True)
-        self.page.wait_for_load_state("domcontentloaded")
-
-        actual_title = self.page.url
-
-        print("actual_title :",actual_title)    
-        print("expected_titles.get(menu_text) :",expected_titles.get(menu_text))  
-        expected_title = expected_titles.get(menu_text)
+class contactUs:
+    def __init__(self, page):
+        self.page = page
+        #Contact Us
+        self.contactUs = page.locator('(//a[text()="Contact us"])[1]')
+            
+        # Consultation Form
+        self.name = page.locator('(//input[@placeholder="Your Name"])[2]')
+        self.email = page.locator('//input[@placeholder="Your Email"]')
+        self.sendOtp = page.locator('//button[@id="send_otp"]')
+        self.enterOTP = page.locator('(//input[@placeholder="Enter OTP"])[2]')
+        self.company = page.locator('(//input[@placeholder="Your Company"])[2]')
+        self.service = page.locator('(//select[@name="service"])[2]')
+        self.phone = page.locator('(//input[@name="phone"])[2]')
+        self.message = page.locator('(//textarea[@placeholder="Message"])[2]')
+        self.submit = page.locator('//input[@name="contact"]')
         
-        assert expected_title is not None, (
-            f"No expected title found in CSV for '{menu_text}'"
-        )
-
-        assert expected_title in actual_title, (f"Validation failed for '{menu_text}'. "f"Expected '{expected_title}', got '{actual_title}'")
-
-        self.page.go_back()
-        self.page.wait_for_load_state("domcontentloaded")
-
-              
+    def contactUs_Click(self):
+        self.contactUs.click()
+        takeScrnsht(self.page, "Contact Us")
+        
+    def fillConsultationForm(self):
+        self.name.fill("name1")
+        self.email.fill("email@test.com")
+        self.sendOtp.click()
+        # Assuming OTP is received and entered correctly
+        self.enterOTP.fill("123456")  
+        self.company.fill("company1")
+        
+        #Service dropdown
+        self.service.wait_for(state="visible")
+        self.service.select_option(label="Web Development")
+        
+        self.phone.fill("9922110031")
+        self.message.fill("Message from a Tester")
+        takeScrnsht(self.page, "Filled_Cons-Form")
+        self.submit.click()
+        takeScrnsht(self.page, "Consul-Form_Submitted")
+        
+        

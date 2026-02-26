@@ -1,10 +1,9 @@
 import pytest
-from pages.contactUs_page import Contact_Us_page_class
-from utils.csv_data_loader import CSVDataLoader
+from pages.contactUs_page import contactUs
 
-@pytest.mark.smoke
+@pytest.mark.order(5)
 def test_ContactUs(page):
-    expected_titles = CSVDataLoader.load_expected_titles("testdata/contact_us.csv")
-
-    abpout_menu=Contact_Us_page_class(page)
-    abpout_menu.click_ContactUs(expected_titles) 
+    contactUs_obj = contactUs(page)
+    contactUs_obj.contactUs_Click()
+    contactUs_obj.fillConsultationForm()
+    
