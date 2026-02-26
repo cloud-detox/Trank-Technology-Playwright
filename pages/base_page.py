@@ -1,9 +1,10 @@
-# BasePage (generic, reusable)
-from playwright.sync_api import Page
-class BasePage:
-    def __init__(self, page:Page):
+
+class portfolio:
+    def __init__(self, page):
         self.page = page
 
-
-    def log_step(self, message: str):
-        print(f"[STEP] {message}")
+        #Portfolio
+        self.portfolio = page.locator('(//a[text()="Portfolio"])[1]')
+        
+    def portfolio_Click(self):
+        self.portfolio.click()

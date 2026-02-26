@@ -1,10 +1,8 @@
-import pytest
-from pages.aboutUs_page import AbourUs
-from utils.csv_data_loader import CSVDataLoader
+import pytest 
 
-@pytest.mark.smoke
-def test_AboutUs(page):
-    expected_titles = CSVDataLoader.load_expected_titles("testdata/aboutUs.csv")
+from pages.aboutus_page import aboutus
 
-    abpout_menu=AbourUs(page)
-    abpout_menu.click_about(expected_titles) 
+@pytest.mark.about
+def aboutus_page(page):
+    aboutus_obj = aboutus(page)
+    aboutus_obj.aboutus_click()

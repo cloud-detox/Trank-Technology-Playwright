@@ -14,7 +14,7 @@ def page(request):
     page.wait_for_load_state("load")
     
     
-    yield page
+    yield page #close the page
 
     context.close()
     browser.close()
