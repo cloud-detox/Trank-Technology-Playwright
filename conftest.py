@@ -1,6 +1,17 @@
 import pytest
 from playwright.sync_api import sync_playwright
 from config import BASE_URL
+import shutil
+import os
+
+def pytest_sessionstart(session):
+    folder = "screenshots"
+
+    if os.path.exists(folder):
+        shutil.rmtree(folder)   # Delete old screenshots
+
+    os.makedirs(folder)        # Create fresh folder
+
 
 @pytest.fixture(scope="session")
 
@@ -13,8 +24,7 @@ def page(request):
     page.goto(BASE_URL)
     page.wait_for_load_state("load")
     
-    
-    yield page
+    yield page #This is kind of return but it also does cleanup after the method execution is done
 
     context.close()
     browser.close()
