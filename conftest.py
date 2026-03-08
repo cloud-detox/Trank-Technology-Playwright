@@ -1,21 +1,34 @@
 import pytest
 from playwright.sync_api import sync_playwright
-from config import BASE_URL
+from config import baseurl
 
-@pytest.fixture(scope="session")
+# @pytest.fixture(scope="session")
+# # def page(request):
+#     # p = sync_playwright().start()
+#     # browser=p.chromium.launch(headless=False)
+#     # context = browser.new_context(ignore_https_errors=True)
+#     # page = context.new_page()
+# # 
+#     # page.goto(baseurl)
+#     # page.wait_for_load_state("load")
+#     # 
+#     # 
+#     # yield page
+# # 
+#     # context.close()
+#     # browser.close()
+#     # p.stop()
 
-def page(request):
-    p = sync_playwright().start()
-    browser=p.chromium.launch(headless=False)
-    context = browser.new_context(ignore_https_errors=True)
-    page = context.new_page()
+#import pytest
+#from playwright.sync_api import Playwright, sync_playwright
 
-    page.goto(BASE_URL)
-    page.wait_for_load_state("load")
+@pytest.fixture(scope="function")
+def page():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False)
+        page = browser.new_page()
+        page.goto(baseurl)
+        yield page
+        browser.close()
+
     
-    
-    yield page
-
-    context.close()
-    browser.close()
-    p.stop()
