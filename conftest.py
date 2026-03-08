@@ -13,8 +13,7 @@ def page(request):
     page.goto(BASE_URL)
     page.wait_for_load_state("load")
     
-    
-    yield page
+    yield page #This is kind of return but it also does cleanup after the method execution is done
 
     context.close()
     browser.close()
