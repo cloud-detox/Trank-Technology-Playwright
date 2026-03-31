@@ -1,25 +1,19 @@
 import pytest
-from pages.technilogies_menu_base import TechnologiesMenuBase
-from utils.csv_data_loader import CSVDataLoader
+
+from pages.technologiespage import Technologiespage
+from pages.eCompage import eCom
+from pages.MobileAppDevpage import MobileAppDevelop
+from pages.RetailEcompage import RetailEcompage
 
 @pytest.mark.smoke
-def test_ECommerceAndDevelopment(page):
-    expected_titles = CSVDataLoader.load_expected_titles("testdata/custom_app.csv")
+def test_ecommerece_techonologies(page):
 
-    tech_menu=TechnologiesMenuBase(page,"eCommerce Development","ecomm")
-    tech_menu.click_all_pages(expected_titles)
+    ecom= eCom(page)
+    ecom.eComoption_click()
 
 
-@pytest.mark.mob
-def test_MobileAppAndDevelopment(page):
-    expected_titles = CSVDataLoader.load_expected_titles("testdata/custom_app.csv")
+    Mobapp =MobileAppDevelop(page)
+    Mobapp.MobAppDev_click()
 
-    tech_menu=TechnologiesMenuBase(page,"Mobile App Development","mobileApp")
-    tech_menu.click_all_pages(expected_titles)
-
-# @pytest.mark.ai
-# def test_aitest(page):
-#     #expected_titles = CSVDataLoader.load_expected_titles("testdata/custom_app.csv")
-
-#     ai_menu=TechnologiesMenuBase(page,)
-#     ai_menu.ai()
+    RetailEcom = RetailEcompage(page)
+    RetailEcom.click_retcomlist()
