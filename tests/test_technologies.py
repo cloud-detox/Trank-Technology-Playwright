@@ -1,25 +1,15 @@
 import pytest
-from pages.technilogies_menu_base import TechnologiesMenuBase
-from utils.csv_data_loader import CSVDataLoader
+
+from pages.technologies_sub_menu import technologies_sub_menu
 
 @pytest.mark.smoke
-def test_ECommerceAndDevelopment(page):
-    expected_titles = CSVDataLoader.load_expected_titles("testdata/custom_app.csv")
 
-    tech_menu=TechnologiesMenuBase(page,"eCommerce Development","ecomm")
-    tech_menu.click_all_pages(expected_titles)
-
-
-@pytest.mark.mob
-def test_MobileAppAndDevelopment(page):
-    expected_titles = CSVDataLoader.load_expected_titles("testdata/custom_app.csv")
-
-    tech_menu=TechnologiesMenuBase(page,"Mobile App Development","mobileApp")
-    tech_menu.click_all_pages(expected_titles)
-
-# @pytest.mark.ai
-# def test_aitest(page):
-#     #expected_titles = CSVDataLoader.load_expected_titles("testdata/custom_app.csv")
-
-#     ai_menu=TechnologiesMenuBase(page,)
-#     ai_menu.ai()
+def test_technologies(page):
+    t=technologies_sub_menu(page)
+    t.technologies_clicking()
+    t.eComdev_clicking()
+    t.mobileapp_clicking()
+    t.artificial_clicking()
+   
+    page.wait_for_timeout(5000)
+    
