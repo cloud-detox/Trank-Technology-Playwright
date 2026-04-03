@@ -14,6 +14,7 @@ def page(request):
     page.wait_for_load_state("load")
     
     
+    
     yield page
 
     context.close()
