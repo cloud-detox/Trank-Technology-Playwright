@@ -39,6 +39,8 @@ def test_headerlink(page):
 @pytest.mark.smoke
 
 def test_footer_links(page):
+    page.goto("https://www.tranktechnologies.com/")
+    page.wait_for_load_state("load")
     f=Footer_page(page)
     f.click_footer_links1()
     f.click_dropdown_option1()
