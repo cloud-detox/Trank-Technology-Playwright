@@ -1,10 +1,10 @@
 import pytest
-from pages.aboutUs_page import AbourUs
-from utils.csv_data_loader import CSVDataLoader
+
+from pages.aboutus import AboutPage
 
 @pytest.mark.smoke
-def test_AboutUs(page):
-    expected_titles = CSVDataLoader.load_expected_titles("testdata/aboutUs.csv")
+def test_aboutus(page):
 
-    abpout_menu=AbourUs(page)
-    abpout_menu.click_about(expected_titles) 
+    i=AboutPage(page)
+    i.aboutusoption_clicking()
+    page.wait_for_timeout(3000)

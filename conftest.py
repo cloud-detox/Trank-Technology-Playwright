@@ -8,12 +8,12 @@ def page(request):
     p = sync_playwright().start()
     browser=p.chromium.launch(headless=False)
     context = browser.new_context(ignore_https_errors=True)
-    page = context.new_page()
+    page=context.new_page()
 
     page.goto(BASE_URL)
     page.wait_for_load_state("load")
-    
-    
+
+
     yield page
 
     context.close()
