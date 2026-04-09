@@ -9,7 +9,7 @@ class FintechPage(vertical):
 
         self.fintech=page.locator('//strong[text()="Fintech"]')
         self.PSD=page.locator('(//a[@href="https://www.tranktechnologies.com/pos-software-development-company"])[1]')
-        self.CP=page.locator('(//a[@href="https://www.tranktechnologies.com/cryptocurrency-mobile-app-development-company-in-india"])[1]')
+        self.CP=page.locator('(//a[@href="https://www.tranktechnologies.com/cryptocurrency-mobile-app-development-company"])[1]')
 
         self.FN =[self.PSD, self.CP]
 

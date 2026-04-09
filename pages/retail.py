@@ -7,7 +7,7 @@ class RetailPage(vertical):
         self.page=page
         super().__init__(page)
         self.retail=page.locator('//strong[text()="Retail and Ecommerce"]')
-        self.ECWD=page.locator('(//a[@href="https://www.tranktechnologies.com/ecommerce-web-development-company-in-india"])[2]')
+        self.ECWD=page.locator('(//a[@href="https://www.tranktechnologies.com/ecommerce-web-development-company"])[2]')
         self.EAWD=page.locator('(//a[@href="https://www.tranktechnologies.com/ecommerce-app-development"])[1]')
 
         self.RP = [self.ECWD,self.EAWD]
