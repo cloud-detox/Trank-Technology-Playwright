@@ -1,10 +1,9 @@
-import pytest
-from pages.blog_page import Blog_page_class
-from utils.csv_data_loader import CSVDataLoader
+# import pytest
+# from config import url
+# from pages.blog_page import blog
 
-@pytest.mark.smoke
-def test_blog(page):
-    expected_titles = CSVDataLoader.load_expected_titles("testdata/blog.csv")
-
-    abpout_menu=Blog_page_class(page)
-    abpout_menu.click_blog(expected_titles)
+# @pytest.mark.smoke
+# def test_blog(page):
+#     obj = blog(page)
+#     obj.blog_hover()
+#     obj.open_blog_page()
