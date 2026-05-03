@@ -1,10 +1,11 @@
+
+
 import pytest
-from pages.blog_page import Blog_page_class
-from utils.csv_data_loader import CSVDataLoader
+from config import BASE_URL
+
+from pages.blogpage import blog
 
 @pytest.mark.smoke
-def test_blog(page):
-    expected_titles = CSVDataLoader.load_expected_titles("testdata/blog.csv")
-
-    abpout_menu=Blog_page_class(page)
-    abpout_menu.click_blog(expected_titles)
+def test_categories_click(page):
+    obj3 = blog(page)
+    obj3.cat_method()
