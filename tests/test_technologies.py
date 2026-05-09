@@ -1,25 +1,28 @@
 import pytest
-from pages.technilogies_menu_base import TechnologiesMenuBase
-from utils.csv_data_loader import CSVDataLoader
+
+from pages.technologies_page import TechnologiesPage
 
 @pytest.mark.smoke
-def test_ECommerceAndDevelopment(page):
-    expected_titles = CSVDataLoader.load_expected_titles("testdata/custom_app.csv")
+@pytest.mark.rande
+def test_technologies(page):
+    obj = TechnologiesPage(page)
+    obj.technologies_hover()
 
-    tech_menu=TechnologiesMenuBase(page,"eCommerce Development","ecomm")
-    tech_menu.click_all_pages(expected_titles)
+@pytest.mark.smoke
+@pytest.mark.rande
+def test_ecommerce_dev(page):
+    obj = TechnologiesPage(page)
+    obj.ecommerce_dev_hover()
 
+@pytest.mark.smoke
+@pytest.mark.rande
+def test_mobile_app_dev(page):
+    obj = TechnologiesPage(page)
+    obj.mobile_app_dev_hover()
 
-@pytest.mark.mob
-def test_MobileAppAndDevelopment(page):
-    expected_titles = CSVDataLoader.load_expected_titles("testdata/custom_app.csv")
+@pytest.mark.smoke
+@pytest.mark.rande
+def test_artificial_intelligence(page):
+    obj = TechnologiesPage(page)
+    obj.artificial_intelligence_hover()
 
-    tech_menu=TechnologiesMenuBase(page,"Mobile App Development","mobileApp")
-    tech_menu.click_all_pages(expected_titles)
-
-# @pytest.mark.ai
-# def test_aitest(page):
-#     #expected_titles = CSVDataLoader.load_expected_titles("testdata/custom_app.csv")
-
-#     ai_menu=TechnologiesMenuBase(page,)
-#     ai_menu.ai()

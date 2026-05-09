@@ -1,32 +1,26 @@
-from pages.base_page import BasePage
-from playwright.sync_api import Page
+class portfolio_page:
+    def __init__(self, page):
+        self.page = page
+        # portfolio main menu
+        self.portfolio = page.locator('//a[@href="https://www.tranktechnologies.com/portfolio"]')
+        self.ics_homework = page.locator('//a[@href="https://www.icshomework.in/"]')
+        self.wings_pharma = page.locator('//a[@href="https://www.wingspharma.com/"]')
+        self.arena_animation = page.locator('//a[@href="https://arenasonipat.com/"]')
+        self.home360 = page.locator('//a[@href="https://home360stores.com/"]')
+        #self.club_meetings = page.locator('(//a[text()="View More"])[5]') - Some issue with this link
+        self.card_cables = page.locator('//a[@href="https://cordscable.tranktechnologies.com/"]')
 
-class portfolio_page_class(BasePage):
-    def __init__(self,page: Page):
-        super().__init__(page)
-        self.click_link= self.page.locator('(//a[text()="Portfolio"])[1]')
-        
-    def click_portfolio(self,expected_titles : dict):      
-        menu_text = self.click_link.inner_text().strip().lower()
-        print("menu_text:",menu_text)  
+    def portfolio_menu_clicking(self):
+        self.portfolio.click()
+        self.page.wait_for_timeout(2000)
 
-        self.click_link.wait_for(state='visible')
-        self.click_link.click(force=True)
-        self.page.wait_for_load_state("domcontentloaded")
-
-        actual_title = self.page.url
-
-        print("actual_title :",actual_title)    
-        print("expected_titles.get(menu_text) :",expected_titles.get(menu_text))  
-        expected_title = expected_titles.get(menu_text)
-        
-        assert expected_title is not None, (
-            f"No expected title found in CSV for '{menu_text}'"
-        )
-
-        assert expected_title in actual_title, (f"Validation failed for '{menu_text}'. "f"Expected '{expected_title}', got '{actual_title}'")
-
-        self.page.go_back()
-        self.page.wait_for_load_state("domcontentloaded")
-
-              
+    def portfolio_links_clicking(self):
+        self.portfolio_links_list = [self.ics_homework, self.wings_pharma, self.arena_animation, self.home360, self.card_cables]
+        for i in self.portfolio_links_list:
+            self.portfolio.click()
+            self.page.wait_for_timeout(2000)
+            with self.page.context.expect_page() as new_page_info:
+                i.click()
+            new_page = new_page_info.value
+            self.page.wait_for_timeout(3000)
+            new_page.close()
