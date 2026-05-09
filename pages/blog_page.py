@@ -1,32 +1,32 @@
-from pages.base_page import BasePage
-from playwright.sync_api import Page
-
-class Blog_page_class(BasePage):
-    def __init__(self,page: Page):
-        super().__init__(page)
-        self.click_link= self.page.locator('(//a[text()="Blog"])[1]')
-
-    def click_blog(self,expected_titles : dict):      
-        menu_text = self.click_link.inner_text().strip().lower()
-        print("menu_text:",menu_text)  
-
-        self.click_link.wait_for(state='visible')
-        self.click_link.click(force=True)
-        self.page.wait_for_load_state("domcontentloaded")
-
-        actual_title = self.page.url
-
-        print("actual_title :",actual_title)    
-        print("expected_titles.get(menu_text) :",expected_titles.get(menu_text))  
-        expected_title = expected_titles.get(menu_text)
+class BlogPage:
+    def __init__(self, page):
+        self.page = page
+        # blog main menu
+        self.blog = page.locator('(//a[@href="https://www.tranktechnologies.com/blog/"])[1]')
+        # sub menu blog category
+        self.appDevelopment = page.locator('(//a[@href="https://www.tranktechnologies.com/blog/category/app-development/"])[2]')
+        self.ai=page.locator('//a[@href="https://www.tranktechnologies.com/blog/category/artificial-intelligence/"]')
+        self.contentMarketing=page.locator('//a[@href="https://www.tranktechnologies.com/blog/category/content-marketing/"]')
+        self.crmDevelopment=page.locator('//a[@href="https://www.tranktechnologies.com/blog/category/crm-development/"]')
+        self.digitalMarketing=page.locator('//a[@href="https://www.tranktechnologies.com/blog/category/digital-marketing/"]')
+        self.ecommdevlopment=page.locator('(//a[@href="https://www.tranktechnologies.com/blog/category/ecommerce-development/"])[5]')
+        self.emailmarketing=page.locator('//a[@href="https://www.tranktechnologies.com/blog/category/email-marketing/"]')
+        self.graphicDesign=page.locator('(//a[@href="https://www.tranktechnologies.com/blog/category/graphic-design/"])[3]')
+        self.softanadIT=page.locator('//a[@href="https://www.tranktechnologies.com/blog/category/software-it-company/"]')
+        self.softwareDevelopment=page.locator('//a[@href="https://www.tranktechnologies.com/blog/category/software-development/"]')
+        self.uiux=page.locator('(//a[@href="https://www.tranktechnologies.com/blog/category/ui-ux-design/"])[5]')
+        self.webDevelopment=page.locator('(//a[@href="https://www.tranktechnologies.com/blog/category/web-development/"])[5]')
         
-        assert expected_title is not None, (
-            f"No expected title found in CSV for '{menu_text}'"
-        )
-
-        assert expected_title in actual_title, (f"Validation failed for '{menu_text}'. "f"Expected '{expected_title}', got '{actual_title}'")
-
+    def open_blog(self):
+        #self.blog.click()   
+        self.page.wait_for_timeout(1000)
+        self.blog_list=[self.appDevelopment,self.ai,self.contentMarketing,self.crmDevelopment,self.digitalMarketing,self.ecommdevlopment,self.emailmarketing,self.graphicDesign,self.softanadIT,self.softwareDevelopment,self.uiux,self.webDevelopment]
+        for i in self.blog_list:
+          self.blog.click()
+          i.click()
+          self.page.go_back()
         self.page.go_back()
-        self.page.wait_for_load_state("domcontentloaded")
+        
+  
+        
 
-              

@@ -1,32 +1,53 @@
-from pages.base_page import BasePage
-from playwright.sync_api import Page
+from conftest import page
 
-class Contact_Us_page_class(BasePage):
-    def __init__(self,page: Page):
-        super().__init__(page)
-        self.click_link= self.page.locator('(//a[text()="Contact us"])[1]')
 
-    def click_ContactUs(self,expected_titles : dict):      
-        menu_text = self.click_link.inner_text().strip().lower()
-        print("menu_text:",menu_text)  
-
-        self.click_link.wait_for(state='visible')
-        self.click_link.click(force=True)
-        self.page.wait_for_load_state("domcontentloaded")
-
-        actual_title = self.page.url
-
-        print("actual_title :",actual_title)    
-        print("expected_titles.get(menu_text) :",expected_titles.get(menu_text))  
-        expected_title = expected_titles.get(menu_text)
+class contactUsPage:
+    def __init__(self, page):
+        self.page = page
+        # Contact Us main menu
+        self.contactUs = page.locator('(//a[@href="https://www.tranktechnologies.com/contact-us"])[1]')
+        # Form fields
+        self.name = page.locator('(//input[@placeholder="Your Name"])[2]')
+        self.email = page.locator('(//input[@placeholder="Your Mail"])[2]')
+        self.sentotp_button=page.locator('(//button[@type="button"])[2]')
+        self.enterotp=page.locator('(//input[@placeholder="Enter OTP"])[2]')
+        self.company=page.locator('(//input[@name="company"])[2]')
+        self.selectService=page.locator('(//select[@name="service"])[2]')
+        self.phone = page.locator('(//input[@name="phone"])[2]')
+        self.message = page.locator('(//textarea[@name="message"])[2]')
+       
         
-        assert expected_title is not None, (
-            f"No expected title found in CSV for '{menu_text}'"
-        )
+        
+        #self.page.wait_for_timeout(2000)
 
-        assert expected_title in actual_title, (f"Validation failed for '{menu_text}'. "f"Expected '{expected_title}', got '{actual_title}'")
+        self.submitBtn = page.locator('(//input[@value="Submit"])[2]')
 
+
+    
+
+    def fill_contact_form(self):
+        self.contactUs.click()
+        self.page.wait_for_timeout(2000)
+        self.name.fill('Amardeep Kumar')
+        self.email.fill('testamar@gmail.com')
+        #self.sentotp_button.click()
+        self.page.wait_for_timeout(2000)
+        self.enterotp.fill('123456')
+        self.company.fill('trank')
+        self.selectService.select_option('App Development')
+        self.phone.fill('7018975624')
+        self.message.fill('testing')
         self.page.go_back()
-        self.page.wait_for_load_state("domcontentloaded")
+       # self.page.wait_for_timeout(5000)
+        #  #recaotcha
+        # self.frame=page.locator('(//iframe[@title="reCAPTCHA"])[2]')
+        # self.frame_locator('(//div[@role="presentation"])[1]').click()
+        # self.submitBtn.click()
+        #self.page.wait_for_timeout(2000)
+        
+        #self.page.wait_for_timeout(5000)
+        
 
-              
+
+        
+                   

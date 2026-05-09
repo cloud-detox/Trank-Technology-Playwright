@@ -1,32 +1,31 @@
-from pages.base_page import BasePage
-from playwright.sync_api import Page
+class PortfolioPage:
+    def __init__(self, page):
+        self.page = page
+        # portfolio main menu
+        self.portfolio = page.locator('//a[@href="https://www.tranktechnologies.com/portfolio"]')
+        #sub menu
+        self.icsHomework_view_more=page.locator('//a[@href="https://www.icshomework.in/"]')
+        self.wingspharma_view_more=page.locator('//a[@href="https://www.wingspharma.com/"]')
+        self.arenaAnimation_view_more=page.locator('//a[@href="https://arenasonipat.com/"]')
+        self.home360_view_more=page.locator('//a[@href="https://home360stores.com/"]')
+        self.clubMeeting_view_more=page.locator('(//a[text()="View More"])[5]')
+        self.cordscable_view_more=page.locator('//a[@href="https://cordscable.tranktechnologies.com/"]')
 
-class portfolio_page_class(BasePage):
-    def __init__(self,page: Page):
-        super().__init__(page)
-        self.click_link= self.page.locator('(//a[text()="Portfolio"])[1]')
+    def open_portfolio(self):
         
-    def click_portfolio(self,expected_titles : dict):      
-        menu_text = self.click_link.inner_text().strip().lower()
-        print("menu_text:",menu_text)  
+        #self.page.wait_for_timeout(1000)  
+        self.portfolio_list=[self.icsHomework_view_more,self.wingspharma_view_more,self.arenaAnimation_view_more,self.home360_view_more,self.clubMeeting_view_more,self.cordscable_view_more]
+        for i in self.portfolio_list:
+            self.portfolio.click()
+            #self.page.wait_for_timeout(1000)
+            #i.click()
+            i.hover()
+            #self.page.wait_for_timeout(1000)
+            self.page.go_back()
 
-        self.click_link.wait_for(state='visible')
-        self.click_link.click(force=True)
-        self.page.wait_for_load_state("domcontentloaded")
 
-        actual_title = self.page.url
-
-        print("actual_title :",actual_title)    
-        print("expected_titles.get(menu_text) :",expected_titles.get(menu_text))  
-        expected_title = expected_titles.get(menu_text)
         
-        assert expected_title is not None, (
-            f"No expected title found in CSV for '{menu_text}'"
-        )
 
-        assert expected_title in actual_title, (f"Validation failed for '{menu_text}'. "f"Expected '{expected_title}', got '{actual_title}'")
 
-        self.page.go_back()
-        self.page.wait_for_load_state("domcontentloaded")
+        
 
-              
