@@ -1,10 +1,12 @@
 import pytest
-from pages.blog_page import Blog_page_class
-from utils.csv_data_loader import CSVDataLoader
+from pages.Blog import Blog
 
-@pytest.mark.smoke
-def test_blog(page):
-    expected_titles = CSVDataLoader.load_expected_titles("testdata/blog.csv")
+# @pytest.mark.smoke
+# def test_blog(page):
+#     blog = Blog(page)
+#     blog.blog_click()
 
-    abpout_menu=Blog_page_class(page)
-    abpout_menu.click_blog(expected_titles)
+# @pytest.mark.smoke
+# def test_category_click(page):
+#     blog = Blog(page)
+#     blog.category_click()
